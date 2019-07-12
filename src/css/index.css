@@ -1,0 +1,15 @@
+body{
+    color:#f00;
+}
+p{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100vh;
+    font-size: 36px;
+    text-align: center;
+    text-transform: capitalize;
+}
