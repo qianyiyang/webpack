@@ -10,7 +10,7 @@ module.exports = merge(common, {
     output: {
         filename: '[name].[chunkhash].js',
         path: path.resolve(__dirname, 'dist'),
-        // publicPath: '//cdn.bootcss.com/' //cdn url
+        // publicPath: '//cdn.bootcss.com/' // 指定存放 JavaScript 文件的 CDN 目录 URL
     },
     plugins: [
         //提取css

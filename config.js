@@ -17,7 +17,7 @@ module.exports = {
                 {
                     loader: MiniCssExtractPlugin.loader,
                     options: {
-                        publicPath: '../'  //使用cdn时换成cdn url
+                        publicPath: '../'  //指定存放 CSS 中导入的资源（例如图片）的 CDN 目录 URL
                     },
                 },
                 'css-loader',
