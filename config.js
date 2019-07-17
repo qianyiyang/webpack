@@ -14,23 +14,30 @@ module.exports = {
         rules: [{
             test: /\.css$/,
             use: [
-                MiniCssExtractPlugin.loader,
+                {
+                    loader: MiniCssExtractPlugin.loader,
+                    options: {
+                        publicPath: '../'  //使用cdn时换成cdn url
+                    },
+                },
                 'css-loader',
             ],
         }, {
             test: /\.(png|jpe?g|gif)$/,
             use: [{
-                loader: 'file-loader',
+                loader: 'url-loader',
                 options: {
-                    outputPath: 'images/',//输出到images文件夹
+                    name: path.join('[name].[ext]?[hash]'),
+                    outputPath: './images/',//输出到images文件夹
                     limit: 500 //是把小于500B的文件打成Base64的格式，写入JS
                 }
             }]
         }, {
             test: /\.js$/,
-            exclude: /node_modules/,
+            exclude: /node_modules/, // npm包不做处理
+            include: /src/, // 只处理src里面的
             use: [{
-                loader: 'babel-loader'
+                loader: 'babel-loader',
             }]
         }]
     },
@@ -40,7 +47,8 @@ module.exports = {
         new HtmlWebpackPlugin({//配置
             filename: 'index.html',//输出文件名
             template: './index.html',//以当前目录下的index.html文件为模板生成dist/index.html文件
-            chunks: ['index']
+            chunks: ['index'],
+            // stylePublicPath: '//cdn.bootcss.com/',// 指定存放 CSS 文件的 CDN 目录 URL
         }),
         new HtmlWebpackPlugin({//配置
             filename: 'list.html',//输出文件名

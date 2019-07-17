@@ -1,6 +1,11 @@
 body{
     color:#f00;
 }
+.aaa{
+    width: 100px;
+    height: 100px;
+    background-image: url(./../images/1222.jpg);
+}
 p{
     display: flex;
     justify-content: center;

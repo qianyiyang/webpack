@@ -9,7 +9,8 @@ module.exports = merge(common, {
     mode: 'production',
     output: {
         filename: '[name].[chunkhash].js',
-        path: path.resolve(__dirname, 'dist')
+        path: path.resolve(__dirname, 'dist'),
+        // publicPath: '//cdn.bootcss.com/' //cdn url
     },
     plugins: [
         //提取css
@@ -30,30 +31,30 @@ module.exports = merge(common, {
             'process.env.apiUrl': JSON.stringify('abc')
         })
     ],
-    optimization: {
-        splitChunks: {
-            cacheGroups: {
-                commons: {
-                    name: 'commons',    //提取出来的文件命名
-                    chunks: 'initial',  //initial表示提取入口文件的公共部分
-                    minChunks: 2,       //表示提取公共部分最少的文件数
-                    minSize: 0          //表示提取公共部分最小的大小
-                }
-                // lib1: {
-                //     test: /[\\/]node_modules[\\/]/,//精确的选择那些公共模块应该被打包
-                //     chunks: "all",
-                //     name: "commons",
-                //     enforce: true,//忽略minSize、maxSize、maxAsyncRequests、maxInitalRequests等限制条件直接打包。
-                // },
-                // commonCss: {
-                //     test: /\.css$/,//精确的选择那些公共模块应该被打包
-                //     chunks: "all",
-                //     name: "css",
-                //     enforce: false,//忽略minSize、maxSize、maxAsyncRequests、maxInitalRequests等限制条件直接打包。
-                //     minChunks: 2,       //表示提取公共部分最少的文件数
-                //     minSize: 0          //表示提取公共部分最小的大小
-                // }
-            }
-        }
-    }
+    // optimization: {
+    //     splitChunks: {
+    //         cacheGroups: {
+    //             commons: {
+    //                 name: 'commons',    //提取出来的文件命名
+    //                 chunks: 'initial',  //initial表示提取入口文件的公共部分
+    //                 minChunks: 2,       //表示提取公共部分最少的文件数
+    //                 minSize: 0          //表示提取公共部分最小的大小
+    //             }
+    // lib1: {
+    //     test: /[\\/]node_modules[\\/]/,//精确的选择那些公共模块应该被打包
+    //     chunks: "all",
+    //     name: "commons",
+    //     enforce: true,//忽略minSize、maxSize、maxAsyncRequests、maxInitalRequests等限制条件直接打包。
+    // },
+    // commonCss: {
+    //     test: /\.css$/,//精确的选择那些公共模块应该被打包
+    //     chunks: "all",
+    //     name: "css",
+    //     enforce: false,//忽略minSize、maxSize、maxAsyncRequests、maxInitalRequests等限制条件直接打包。
+    //     minChunks: 2,       //表示提取公共部分最少的文件数
+    //     minSize: 0          //表示提取公共部分最小的大小
+    // }
+    //         }
+    //     }
+    // }
 });
