@@ -1,4 +1,3 @@
-import $ from "jquery";
 import './css/common.css';
 import './css/index.css';
 
@@ -10,6 +9,7 @@ function component() {
 
     return element;
 }
-// console.log($);
+console.log($);
+console.log('asf')
 console.log(process.env.NODE_ENV, process.env.apiUrl);
 document.body.appendChild(component());

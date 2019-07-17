@@ -1,4 +1,3 @@
-import $ from "jquery";
 import './css/common.css';
 import './css/list.css';
 

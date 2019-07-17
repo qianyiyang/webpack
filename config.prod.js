@@ -31,30 +31,25 @@ module.exports = merge(common, {
             'process.env.apiUrl': JSON.stringify('abc')
         })
     ],
-    // optimization: {
-    //     splitChunks: {
-    //         cacheGroups: {
-    //             commons: {
-    //                 name: 'commons',    //提取出来的文件命名
-    //                 chunks: 'initial',  //initial表示提取入口文件的公共部分
-    //                 minChunks: 2,       //表示提取公共部分最少的文件数
-    //                 minSize: 0          //表示提取公共部分最小的大小
-    //             }
-    // lib1: {
-    //     test: /[\\/]node_modules[\\/]/,//精确的选择那些公共模块应该被打包
-    //     chunks: "all",
-    //     name: "commons",
-    //     enforce: true,//忽略minSize、maxSize、maxAsyncRequests、maxInitalRequests等限制条件直接打包。
-    // },
-    // commonCss: {
-    //     test: /\.css$/,//精确的选择那些公共模块应该被打包
-    //     chunks: "all",
-    //     name: "css",
-    //     enforce: false,//忽略minSize、maxSize、maxAsyncRequests、maxInitalRequests等限制条件直接打包。
-    //     minChunks: 2,       //表示提取公共部分最少的文件数
-    //     minSize: 0          //表示提取公共部分最小的大小
-    // }
-    //         }
-    //     }
-    // }
+    optimization: {
+        splitChunks: {
+            cacheGroups: {
+                // 注意: priority属性
+                // 其次: 打包业务中公共代码
+                common: {
+                    name: "common",
+                    chunks: "all",
+                    minSize: 1,
+                    priority: 0
+                },
+                // 首先: 打包node_modules中的文件
+                vendor: {
+                    name: "vendor",
+                    test: /[\\/]node_modules[\\/]/,
+                    chunks: "all",
+                    priority: 10
+                }
+            }
+        }
+    }
 });

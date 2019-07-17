@@ -8,7 +8,6 @@ module.exports = {
     entry: {
         index: './src/index.js',
         list: './src/list.js',
-        // jquery: 'jquery',
     },
     module: {
         rules: [{
@@ -19,6 +18,7 @@ module.exports = {
                     options: {
                         publicPath: '../'  //指定存放 CSS 中导入的资源（例如图片）的 CDN 目录 URL
                     },
+
                 },
                 'css-loader',
             ],
@@ -47,13 +47,17 @@ module.exports = {
         new HtmlWebpackPlugin({//配置
             filename: 'index.html',//输出文件名
             template: './index.html',//以当前目录下的index.html文件为模板生成dist/index.html文件
-            chunks: ['index'],
+            chunks: ['index', 'common', 'vendor'], // 生成的html文件中引入的js文件名，与entry入口和slpitChunks分离等配置的js文件名相同
             // stylePublicPath: '//cdn.bootcss.com/',// 指定存放 CSS 文件的 CDN 目录 URL
         }),
         new HtmlWebpackPlugin({//配置
             filename: 'list.html',//输出文件名
             template: './index.html',//以当前目录下的index.html文件为模板生成dist/index.html文件
-            chunks: ['list']
+            chunks: ['list', 'common', 'vendor'], // 生成的html文件中引入的js文件名，与entry入口和slpitChunks分离等配置的js文件名相同
+        }),
+        new webpack.ProvidePlugin({
+            // npm i jquery -S 安装jquery，然后利用ProvidePlugin这个webpack内置API将jquery设置为全局引入，从而无需单个页面import引入
+            $: "jquery"
         }),
     ]
 };
