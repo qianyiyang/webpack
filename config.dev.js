@@ -1,8 +1,8 @@
 const path = require('path');
 const webpack = require("webpack");
-const merge = require('webpack-merge');
+const merge = require('webpack-merge'); //合并config
 const common = require('./config.js');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+// const MiniCssExtractPlugin = require("mini-css-extract-plugin");//处理css
 
 module.exports = merge(common, {
     mode: "development",
@@ -14,12 +14,12 @@ module.exports = merge(common, {
     plugins: [
         new webpack.NamedModulesPlugin(),
         new webpack.HotModuleReplacementPlugin(),
-        new MiniCssExtractPlugin({
-            filename: "./css/[name].[hash].css",
-            chunkFilename: "./css/[id].[hash].css"
-        }),
+        // new MiniCssExtractPlugin({
+        //     filename: "./css/[name].[hash].css",
+        //     chunkFilename: "./css/[id].[hash].css"
+        // }),
         new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify('development'),
+            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
             'process.env.apiUrl': JSON.stringify('123')
         })
     ],

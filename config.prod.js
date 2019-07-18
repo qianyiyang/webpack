@@ -6,7 +6,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 module.exports = merge(common, {
-    mode: 'production',
+    mode: "production",
     output: {
         filename: '[name].[chunkhash].js',
         path: path.resolve(__dirname, 'dist'),
@@ -27,12 +27,18 @@ module.exports = merge(common, {
         }),
         //定义环境变量
         new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify('production'),
+            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
             'process.env.apiUrl': JSON.stringify('abc')
         })
     ],
     optimization: {
         splitChunks: {
+            chunks: 'all',
+            minSize: 30000,
+            minChunks: 2,
+            maxAsyncRequests: 5,//异步请求的chunks不应该超过此值
+            maxInitialRequests: 3,//entry文件请求的chunks不应该超过此值（请求过多，耗时）
+            name: true,// 生成文件名
             cacheGroups: {
                 // 注意: priority属性
                 // 其次: 打包业务中公共代码
@@ -40,13 +46,15 @@ module.exports = merge(common, {
                     name: "common",
                     chunks: "all",
                     minSize: 1,
-                    priority: 0
+                    minChunks: 2,
+                    priority: -20,
                 },
                 // 首先: 打包node_modules中的文件
                 vendor: {
                     name: "vendor",
                     test: /[\\/]node_modules[\\/]/,
                     chunks: "all",
+                    minChunks: 2,
                     priority: 10
                 }
             }

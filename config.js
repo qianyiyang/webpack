@@ -1,8 +1,8 @@
 const path = require('path');
 const webpack = require('webpack');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');//清除dist
+const HtmlWebpackPlugin = require('html-webpack-plugin');//自动引入js
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");//处理css
 
 module.exports = {
     entry: {
@@ -13,13 +13,13 @@ module.exports = {
         rules: [{
             test: /\.css$/,
             use: [
-                {
-                    loader: MiniCssExtractPlugin.loader,
-                    options: {
-                        publicPath: '../'  //指定存放 CSS 中导入的资源（例如图片）的 CDN 目录 URL
+                process.env.NODE_ENV === 'development' ? 'style-loader' :
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                            publicPath: '../'  //指定存放 CSS 中导入的资源（例如图片）的 CDN 目录 URL
+                        },
                     },
-
-                },
                 'css-loader',
             ],
         }, {
@@ -40,6 +40,9 @@ module.exports = {
                 loader: 'babel-loader',
             }]
         }]
+    },
+    performance: {
+        hints: false
     },
     plugins: [// 对应的插件
         //清除dist
