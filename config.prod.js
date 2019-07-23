@@ -36,8 +36,8 @@ module.exports = merge(common, {
             chunks: 'all',
             minSize: 30000,
             minChunks: 2,
-            maxAsyncRequests: 5,//异步请求的chunks不应该超过此值
-            maxInitialRequests: 3,//entry文件请求的chunks不应该超过此值（请求过多，耗时）
+            // maxAsyncRequests: 5,//异步请求的chunks不应该超过此值
+            // maxInitialRequests: 3,//entry文件请求的chunks不应该超过此值（请求过多，耗时）
             name: true,// 生成文件名
             cacheGroups: {
                 // 注意: priority属性

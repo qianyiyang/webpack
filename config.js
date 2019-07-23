@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const fs = require('fs');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');//清除dist
 const HtmlWebpackPlugin = require('html-webpack-plugin');//自动引入js
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");//处理css
