@@ -15,5 +15,6 @@ function component() {
 
     return element;
 }
+console.log(process.env.REACT_APP_SECRET_API)
 console.log(process.env.NODE_ENV, process.env.apiUrl);
 document.body.appendChild(component());
